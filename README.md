@@ -10,7 +10,7 @@ Description:
 PeerPal is a mental wellness tool designed to help students cope with peer pressure through educational modules, journaling, forums, and professional support links.
 
 Video Link:
-[Upload your video in the repo as project_video.mp4]
+https://github.com/Kunalthakran/Kunal_Thakran_cse-ds-A-_PearPal/blob/84853b148f93d5189e0b6e9977e32875187d5ec3/project_video.mp4
 
 Technologies Used:
 - HTML, CSS, JavaScript
