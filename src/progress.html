@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PeerPal – Progress Tracking</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    function saveMood() {
+      const mood = document.getElementById('mood').value;
+      let data = JSON.parse(localStorage.getItem('moodLog')||'[]');
+      data.push({ mood: +mood, date: new Date().toLocaleDateString() });
+      localStorage.setItem('moodLog', JSON.stringify(data));
+      drawCharts();
+    }
+    function drawCharts() {
+      const data = JSON.parse(localStorage.getItem('moodLog')||'[]');
+      const labels = data.map(d=>d.date);
+      const values = data.map(d=>d.mood);
+      new Chart(document.getElementById('moodChart'), {
+        type: 'line',
+        data: { labels, datasets:[{ label:'Mood', data: values, fill:false, borderColor:'#4a90e2' }] }
+      });
+    }
+    window.onload = drawCharts;
+  </script>
+</head>
+<body>
+  <header><h1>Progress Tracking</h1></header>
+  <nav><a href="index.html">← Home</a></nav>
+  <main>
+    <label>How’s your mood today? (1–10)</label>
+    <input id="mood" type="number" min="1" max="10" value="5">
+    <button onclick="saveMood()">Save Mood</button>
+    <canvas id="moodChart"></canvas>
+  </main>
+  <footer>&copy; 2025 PeerPal</footer>
+</body>
+</html>

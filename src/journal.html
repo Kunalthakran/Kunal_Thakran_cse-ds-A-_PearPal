@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PeerPal – Journal</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    function saveEntry() {
+      const entry = document.getElementById('journal').value.trim();
+      if (!entry) return alert('Write something first.');
+      let entries = JSON.parse(localStorage.getItem('journalEntries')||'[]');
+      entries.unshift({ text: entry, date: new Date().toLocaleString() });
+      localStorage.setItem('journalEntries', JSON.stringify(entries));
+      loadEntries();
+      document.getElementById('journal').value = '';
+    }
+    function loadEntries() {
+      const list = document.getElementById('entryList');
+      list.innerHTML = '';
+      JSON.parse(localStorage.getItem('journalEntries')||'[]')
+        .forEach(e => {
+          const li = document.createElement('li');
+          li.textContent = `${e.date}: ${e.text}`;
+          list.appendChild(li);
+        });
+    }
+    window.onload = loadEntries;
+  </script>
+</head>
+<body>
+  <header><h1>Private Journaling</h1></header>
+  <nav><a href="index.html">← Home</a></nav>
+  <main>
+    <textarea id="journal" placeholder="Write your thoughts..." rows="6"></textarea>
+    <button onclick="saveEntry()">Save Entry</button>
+    <h2>Previous Entries</h2>
+    <ul id="entryList"></ul>
+  </main>
+  <footer>&copy; 2025 PeerPal</footer>
+</body>
+</html>

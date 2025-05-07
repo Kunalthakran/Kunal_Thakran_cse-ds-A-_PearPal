@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>PeerPal – Modules</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    const quizData = [
+      { q: 'Peer pressure can be both positive and negative.', answer: 'True' },
+      { q: 'One way to resist negative peer pressure is to say “no” assertively.', answer: 'True' },
+      { q: 'Peer pressure only affects academic performance.', answer: 'False' }
+    ];
+    function submitQuiz(e) {
+      e.preventDefault();
+      let score = 0;
+      quizData.forEach((item, idx) => {
+        const val = document.querySelector(`input[name="q${idx}"]:checked`);
+        if (val && val.value === item.answer) score++;
+      });
+      document.getElementById('quizResult').innerText =
+        `You scored ${score} out of ${quizData.length}.`;
+    }
+  </script>
+</head>
+<body>
+  <header><h1>Educational Modules</h1></header>
+  <nav><a href="index.html">← Home</a></nav>
+  <main>
+    <section>
+      <h2>Video Lessons</h2>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=example1" target="_blank">Understanding Peer Pressure</a></li>
+        <li><a href="https://www.youtube.com/watch?v=example2" target="_blank">How to Say No</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Quick Quiz</h2>
+      <form onsubmit="submitQuiz(event)">
+        <div>
+          <p>1. Peer pressure can be both positive and negative.</p>
+          <label><input type="radio" name="q0" value="True"> True</label>
+          <label><input type="radio" name="q0" value="False"> False</label>
+        </div>
+        <div>
+          <p>2. One way to resist negative peer pressure is to say “no” assertively.</p>
+          <label><input type="radio" name="q1" value="True"> True</label>
+          <label><input type="radio" name="q1" value="False"> False</label>
+        </div>
+        <div>
+          <p>3. Peer pressure only affects academic performance.</p>
+          <label><input type="radio" name="q2" value="True"> True</label>
+          <label><input type="radio" name="q2" value="False"> False</label>
+        </div>
+        <input type="submit" value="Submit Quiz">
+      </form>
+      <p id="quizResult"></p>
+    </section>
+  </main>
+  <footer>&copy; 2025 PeerPal</footer>
+</body>
+</html>
